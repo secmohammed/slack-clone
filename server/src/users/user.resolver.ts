@@ -1,29 +1,34 @@
 import { Query, Resolver, Context, Mutation, Args } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
+
+import { AuthGuard } from '../shared/middlewares/auth.guard';
 import { LoginUser } from './login-user.validation';
 import { RegisterUser } from './register-user.validation';
-import { AuthGuard } from '../middlewares/auth.guard';
+import { UserDTO } from './user.dto';
+import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
 
-@Resolver('User')
+@Resolver(() => UserEntity)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
-  @Query()
+  @Query(() => [UserEntity])
   users() {
     return this.userService.get();
   }
 
-  @Mutation()
-  login(@Args('data') data: LoginUser) {}
-  @Mutation()
+  @Mutation(() => UserEntity)
+  login(@Args('data') data: LoginUser) {
+    return this.userService.login(data);
+  }
+  @Mutation(() => UserEntity)
   register(@Args('data') data: RegisterUser) {
     return this.userService.register(data);
   }
 
-  @Query()
+  @Query(() => UserEntity)
   @UseGuards(new AuthGuard())
-  me(@Context('user') user: any) {
-    return this.userService.me(user.id);
+  me(@Context('user') { id }) {
+    return this.userService.me(id);
   }
 }

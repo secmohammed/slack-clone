@@ -3,14 +3,15 @@ import { AppModule } from './app.module';
 import * as helmet from 'helmet';
 import * as fastifyRateLimit from 'fastify-rate-limit';
 
-import { ValidationPipe } from './pipes/validation.pipe';
-import { redis } from './utils/redis';
+import { ValidationPipe } from './shared/pipes/validation.pipe';
+import { redis } from './shared/utils/redis';
 import 'dotenv/config';
 
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+
 async function bootstrap() {
   const fastify = new FastifyAdapter({ logger: true });
   const app = await NestFactory.create<NestFastifyApplication>(

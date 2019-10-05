@@ -3,28 +3,29 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { join } from 'path';
-
-import { GraphQLErrorFilter } from './filters/graphql-exception.filter';
-import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { ChannelsModule } from './channels/channels.module';
+import { GraphQLErrorFilter } from './shared/filters/graphql-exception.filter';
+import { LoggingInterceptor } from './shared/interceptors/logging.interceptor';
+import { MessagesModule } from './messages/messages.module';
+import { TeamsModule } from './teams/teams.module';
 import { UsersModule } from './users/users.module';
 
 const ormconfig = require('../ormconfig.json');
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(ormconfig[0]),
-
     GraphQLModule.forRoot({
-      typePaths: ['./**/*.gql'],
-      definitions: {
-        path: join(process.cwd(), 'src/schemas/graphql.d.ts'),
-      },
-      context: ({ req, res }) => ({ headers: req.headers }),
+      autoSchemaFile: 'schema.gql',
+      context: ({ req }) => ({ headers: req.headers }),
       debug: true,
       installSubscriptionHandlers: true,
     }),
+
+    TypeOrmModule.forRoot(ormconfig[0]),
     UsersModule,
+    ChannelsModule,
+    TeamsModule,
+    MessagesModule,
   ],
   providers: [
     {

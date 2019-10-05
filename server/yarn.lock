@@ -374,7 +374,7 @@
     fastify-formbody "3.1.0"
     path-to-regexp "3.1.0"
 
-"@nestjs/testing@^6.0.0":
+"@nestjs/testing@^6.8.2":
   version "6.8.2"
   resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.8.2.tgz#1c28fbe6c46fa3757ee0143b49f6c0f917117f93"
   integrity sha512-suNHK7Ij933zDdvi+JLe7Y1y4aJ6yhrdw4J7AcX5NiwQgkzgrJxgEs7dgjXO5i0CAVb7yB8hxyQEi+jQOv6ctQ==
@@ -510,6 +510,11 @@
   integrity sha512-CeBpmX1J8kWLcDEnI3Cl2Eo6RfbGvzUctA+CjZUhOKDFbLfcr7fc4usEqLNWetrlJd7RhAkyYe2czXop4fICpw==
   dependencies:
     "@babel/types" "^7.3.0"
+
+"@types/bcryptjs@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@types/bcryptjs/-/bcryptjs-2.4.2.tgz#e3530eac9dd136bfdfb0e43df2c4c5ce1f77dfae"
+  integrity sha512-LiMQ6EOPob/4yUL66SZzu6Yh77cbzJFYll+ZfaPiPPFswtIlA/Fs1MzdKYA7JApHU49zQTbJGX3PDmCpIdDBRQ==
 
 "@types/body-parser@*", "@types/body-parser@1.17.1":
   version "1.17.1"
@@ -1325,6 +1330,11 @@ bcrypt-pbkdf@^1.0.0:
   integrity sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
   dependencies:
     tweetnacl "^0.14.3"
+
+bcryptjs@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
+  integrity sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
 
 big-integer@^1.6.17:
   version "1.6.46"
