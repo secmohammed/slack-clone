@@ -31,10 +31,10 @@ export class UserEntity extends BaseEntity {
   @Column('text')
   password: string;
   @OneToMany(type => Team, team => team.owner)
-  @Field(() => [Team])
+  @Field(() => [Team], { defaultValue: [] })
   teams: Team[];
   @OneToMany(type => Message, messages => messages.user)
-  @Field(() => [Message])
+  @Field(() => [Message], { defaultValue: [] })
   messages: Message[];
 
   @CreateDateColumn()
@@ -63,7 +63,7 @@ export class UserEntity extends BaseEntity {
       updated_at,
     };
     if (showToken) {
-      responseObject.token = token;
+      responseObject.auth_token = token;
     }
     return responseObject;
   }

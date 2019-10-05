@@ -1,10 +1,11 @@
 import { ObjectID } from 'typeorm';
+import { Field, ObjectType } from 'type-graphql';
+import { UserEntity } from './user.entity';
 
-export interface UserDTO {
-  id: ObjectID;
-  name: string;
-  readonly password: string;
-  created_at: Date;
+@ObjectType()
+export class UserDTO extends UserEntity {
+  @Field()
+  auth_token: string;
 }
 
 export interface AuthToken {

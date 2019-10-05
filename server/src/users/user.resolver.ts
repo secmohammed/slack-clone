@@ -17,8 +17,8 @@ export class UserResolver {
     return this.userService.get();
   }
 
-  @Mutation(() => UserEntity)
-  login(@Args('data') data: LoginUser) {
+  @Mutation(() => UserDTO)
+  async login(@Args('data') data: LoginUser): Promise<UserDTO> {
     return this.userService.login(data);
   }
   @Mutation(() => UserEntity)

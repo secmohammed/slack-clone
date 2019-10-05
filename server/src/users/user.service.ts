@@ -1,7 +1,12 @@
 import { UserDTO } from './user.dto';
 
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  HttpStatus,
+  HttpException,
+} from '@nestjs/common';
 import { ObjectID, Repository } from 'typeorm';
 import { compareSync } from 'bcryptjs';
 
@@ -16,14 +21,16 @@ export class UserService {
     private readonly users: Repository<User>,
   ) {}
   async get() {
-    return this.users.find();
+    return this.users.find({ relations: ['teams', 'messages'] });
   }
   async login({ email, password }: LoginUser) {
     const user = await this.users.findOneOrFail({
       where: { email },
     });
     if (!compareSync(password, user.password)) {
+      throw new HttpException('Invalid Credentials', HttpStatus.UNAUTHORIZED);
     }
+    return user.toResponseObject();
   }
   async register({
     password,

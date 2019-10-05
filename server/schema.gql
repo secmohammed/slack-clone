@@ -31,7 +31,7 @@ type MessageEntity {
 }
 
 type Mutation {
-  login(data: LoginUser!): UserEntity!
+  login(data: LoginUser!): UserDTO!
   register(data: RegisterUser!): UserEntity!
 }
 
@@ -48,7 +48,6 @@ input RegisterUser {
   password: String!
   name: String!
   password_confirmation: String!
-  seller: Boolean!
 }
 
 type TeamEntity {
@@ -61,12 +60,23 @@ type TeamEntity {
   updated_at: DateTime!
 }
 
+type UserDTO {
+  id: ID!
+  name: String!
+  email: String!
+  teams: [TeamEntity!]
+  messages: [MessageEntity!]
+  created_at: DateTime!
+  updated_at: DateTime!
+  auth_token: String!
+}
+
 type UserEntity {
   id: ID!
   name: String!
   email: String!
-  teams: [TeamEntity!]!
-  messages: [MessageEntity!]!
+  teams: [TeamEntity!]
+  messages: [MessageEntity!]
   created_at: DateTime!
   updated_at: DateTime!
 }

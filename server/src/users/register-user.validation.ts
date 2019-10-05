@@ -14,8 +14,4 @@ export class RegisterUser extends LoginUser {
   @IsNotEmpty()
   @Field()
   password_confirmation: string;
-  @IsNotEmpty()
-  @IsBoolean()
-  @Field()
-  seller: boolean;
 }
