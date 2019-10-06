@@ -21,12 +21,12 @@ export class UserResolver {
   async login(@Args('data') data: LoginUser): Promise<UserDTO> {
     return this.userService.login(data);
   }
-  @Mutation(() => UserEntity)
+  @Mutation(() => UserDTO)
   register(@Args('data') data: RegisterUser) {
     return this.userService.register(data);
   }
 
-  @Query(() => UserEntity)
+  @Query(() => UserDTO)
   @UseGuards(new AuthGuard())
   me(@Context('user') { id }) {
     return this.userService.me(id);

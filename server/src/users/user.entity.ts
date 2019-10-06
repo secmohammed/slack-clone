@@ -15,7 +15,7 @@ import { sign } from 'jsonwebtoken';
 import { MessageEntity as Message } from '../messages/message.entity';
 import { TeamEntity as Team } from '../teams/team.entity';
 import { config } from '../shared/config';
-
+import { ChannelEntity as Channel } from '../channels/channel.entity';
 @Entity('users')
 @ObjectType()
 export class UserEntity extends BaseEntity {
@@ -33,6 +33,10 @@ export class UserEntity extends BaseEntity {
   @OneToMany(type => Team, team => team.owner)
   @Field(() => [Team], { defaultValue: [] })
   teams: Team[];
+  @OneToMany(type => Channel, channel => channel.owner)
+  @Field(() => [Channel], { defaultValue: [] })
+  channels: Channel[];
+
   @OneToMany(type => Message, messages => messages.user)
   @Field(() => [Message], { defaultValue: [] })
   messages: Message[];

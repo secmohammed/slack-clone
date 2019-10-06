@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChannelsModule } from './channels/channels.module';
 import { GraphQLErrorFilter } from './shared/filters/graphql-exception.filter';
 import { LoggingInterceptor } from './shared/interceptors/logging.interceptor';
+import { MembersModule } from './members/members.module';
 import { MessagesModule } from './messages/messages.module';
 import { TeamsModule } from './teams/teams.module';
 import { UsersModule } from './users/users.module';
@@ -26,6 +27,7 @@ const ormconfig = require('../ormconfig.json');
     ChannelsModule,
     TeamsModule,
     MessagesModule,
+    MembersModule,
   ],
   providers: [
     {

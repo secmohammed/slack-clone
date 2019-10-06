@@ -1,3 +1,4 @@
+import { ObjectType, ID, Field } from 'type-graphql';
 import {
   UpdateDateColumn,
   CreateDateColumn,
@@ -5,16 +6,13 @@ import {
   Entity,
   BaseEntity,
   PrimaryGeneratedColumn,
-  BeforeInsert,
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { hash } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
-import { config } from '../shared/config';
-import { TeamEntity as Team } from '../teams/team.entity';
+
 import { MessageEntity as Message } from '../messages/message.entity';
-import { ObjectType, ID, Field } from 'type-graphql';
+import { TeamEntity as Team } from '../teams/team.entity';
+import { UserEntity as User } from '../users/user.entity';
 
 @Entity('channels')
 @ObjectType()
@@ -28,6 +26,9 @@ export class ChannelEntity extends BaseEntity {
   @Column('boolean')
   @Field()
   public: boolean;
+  @ManyToOne(type => User, user => user.channels)
+  @Field(() => User)
+  owner: User;
   @ManyToOne(type => Team, team => team.channels)
   @Field(() => Team)
   team: Team;

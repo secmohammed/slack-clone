@@ -7,16 +7,58 @@ type ChannelEntity {
   id: ID!
   name: String!
   public: Boolean!
+  owner: UserEntity!
   team: TeamEntity!
   messages: [MessageEntity!]!
   created_at: DateTime!
   updated_at: DateTime!
 }
 
+input CreateChannel {
+  name: String!
+  published: Boolean = true
+  teamId: String!
+}
+
+input CreateMember {
+  userId: String!
+  teamId: String!
+}
+
+input CreateMessage {
+  text: String!
+  channelId: String!
+}
+
+input CreateTeam {
+  name: String!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
+
+input DeleteChannel {
+  channelId: String!
+}
+
+input DeleteTeam {
+  teamId: String!
+}
+
+input DestroyMember {
+  userId: String!
+  teamId: String!
+}
+
+input DestroyMessage {
+  messageId: String!
+}
+
+input IsID {
+  id: String!
+}
 
 input LoginUser {
   email: String!
@@ -31,8 +73,18 @@ type MessageEntity {
 }
 
 type Mutation {
+  createChannel(data: CreateChannel!): ChannelEntity!
+  updateChannel(data: UpdateChannel!): ChannelEntity!
+  deleteChannel(data: DeleteChannel!): ChannelEntity!
+  storeMember(data: CreateMember!): UserDTO!
+  deleteMember(data: DestroyMember!): UserDTO!
+  createMessage(data: CreateMessage!): MessageEntity!
+  updateMessage(data: UpdateMessage!): MessageEntity!
+  destroyMessage(data: DestroyMessage!): MessageEntity!
+  createTeam(data: CreateTeam!): TeamEntity!
+  deleteTeam(data: DeleteTeam!): TeamEntity!
   login(data: LoginUser!): UserDTO!
-  register(data: RegisterUser!): UserEntity!
+  register(data: RegisterUser!): UserDTO!
 }
 
 type Query {
@@ -40,7 +92,7 @@ type Query {
   messages: [MessageEntity!]!
   teams: [TeamEntity!]!
   users: [UserEntity!]!
-  me: UserEntity!
+  me: UserDTO!
 }
 
 input RegisterUser {
@@ -60,11 +112,22 @@ type TeamEntity {
   updated_at: DateTime!
 }
 
+input UpdateChannel {
+  channelId: String!
+  name: String!
+}
+
+input UpdateMessage {
+  text: String!
+  messageId: String!
+}
+
 type UserDTO {
   id: ID!
   name: String!
   email: String!
   teams: [TeamEntity!]
+  channels: [ChannelEntity!]
   messages: [MessageEntity!]
   created_at: DateTime!
   updated_at: DateTime!
@@ -76,6 +139,7 @@ type UserEntity {
   name: String!
   email: String!
   teams: [TeamEntity!]
+  channels: [ChannelEntity!]
   messages: [MessageEntity!]
   created_at: DateTime!
   updated_at: DateTime!
