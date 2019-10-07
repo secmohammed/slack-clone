@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
     Container,
     Header,
@@ -14,11 +14,6 @@ const CreateTeam = (props: any) => {
     const { value: name, bind: bindName, reset: resetName } = useInput("");
     const [createTeam, { error, data }] = useMutation(CREATE_TEAM_MUTATION, {
         errorPolicy: "all"
-    });
-    useEffect(() => {
-        if (!localStorage.getItem("token")) {
-            props.history.push("/login");
-        }
     });
     const handleSubmit = async (e: any) => {
         e.preventDefault();
