@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Container,
     Input,
@@ -19,6 +19,13 @@ const Register = (props: any) => {
         bind: bindPassword,
         reset: resetPassword
     } = useInput("");
+
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+            props.history.push("/");
+        }
+    });
+
     const [register, { error, data }] = useMutation(REGISTER_USER_MUTATION, {
         errorPolicy: "all"
     });
@@ -82,7 +89,11 @@ const Register = (props: any) => {
                     error.graphQLErrors.map(({ message }, i) => (
                         <Message negative key={i}>
                             <Message.Header>Error</Message.Header>
-                            <p>{message}</p>
+                            {Object.values(message).map(
+                                (error: any, key: number) => (
+                                    <p key={key}> {error} </p>
+                                )
+                            )}
                         </Message>
                     ))}
             </Form>

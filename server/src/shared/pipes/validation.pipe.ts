@@ -24,20 +24,18 @@ export class ValidationPipe implements PipeTransform<any> {
     const errors = await validate(object);
     if (errors.length > 0) {
       throw new HttpException(
-        `Validation failed: ${this.formatErrors(errors)}`,
+        this.formatErrors(errors),
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
     return value;
   }
   private formatErrors(errors: any[]) {
-    return errors
-      .map(err => {
-        for (let property in err.constraints) {
-          return err.constraints[property];
-        }
-      })
-      .join(', ');
+    return errors.map(err => {
+      for (let property in err.constraints) {
+        return err.constraints[property];
+      }
+    });
   }
   private isEmpty(value: any) {
     return !(Object.keys(value).length > 0);
