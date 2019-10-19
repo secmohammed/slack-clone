@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import {
     Container,
     Header,
@@ -10,11 +11,12 @@ import {
 import { useInput } from "../../components/partials/hooks/useInput";
 import { useMutation } from "@apollo/react-hooks";
 import CREATE_TEAM_MUTATION from "../../graphql/teams/mutations/CREATE_TEAM";
-const CreateTeam = (props: any) => {
+const CreateTeam = () => {
     const { value: name, bind: bindName, reset: resetName } = useInput("");
     const [createTeam, { error, data }] = useMutation(CREATE_TEAM_MUTATION, {
         errorPolicy: "all"
     });
+    const history = useHistory();
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         await createTeam({
@@ -25,7 +27,7 @@ const CreateTeam = (props: any) => {
 
         if (data && data.login) {
             resetName();
-            props.history.push("/");
+            history.push("/");
         }
     };
     return (
