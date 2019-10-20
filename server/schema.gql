@@ -87,6 +87,14 @@ type Mutation {
   register(data: RegisterUser!): UserDTO!
 }
 
+type NotificationEntity {
+  id: ID!
+  description: String!
+  user: UserEntity!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
 type Query {
   channels: [ChannelEntity!]!
   messages: [MessageEntity!]!
@@ -100,6 +108,10 @@ input RegisterUser {
   password: String!
   name: String!
   password_confirmation: String!
+}
+
+type Subscription {
+  messageAdded: NotificationEntity!
 }
 
 type TeamEntity {
@@ -129,6 +141,7 @@ type UserDTO {
   teams: [TeamEntity!]
   channels: [ChannelEntity!]
   messages: [MessageEntity!]
+  notifications: [NotificationEntity!]
   created_at: DateTime!
   updated_at: DateTime!
   auth_token: String!
@@ -141,6 +154,7 @@ type UserEntity {
   teams: [TeamEntity!]
   channels: [ChannelEntity!]
   messages: [MessageEntity!]
+  notifications: [NotificationEntity!]
   created_at: DateTime!
   updated_at: DateTime!
 }

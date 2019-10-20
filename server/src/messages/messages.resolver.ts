@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, Mutation, Context } from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
 import { UseGuards } from '@nestjs/common';
 
 import { AuthGuard } from '../shared/middlewares/auth.guard';
@@ -8,7 +9,7 @@ import { IsID } from '../shared/validations/id.validation';
 import { MessageEntity } from './message.entity';
 import { MessageService } from './message.service';
 import { UpdateMessage } from './update-message.validation';
-
+import { pubSub } from '../shared/utils/pubsub';
 @Resolver(() => MessageEntity)
 export class MessageResolver {
   constructor(private readonly messageService: MessageService) {}
@@ -20,11 +21,13 @@ export class MessageResolver {
   }
   @Mutation(() => MessageEntity)
   @UseGuards(new AuthGuard())
-  createMessage(
+  async createMessage(
     @Args('data') data: CreateMessage,
     @Context('user') { id }: IsID,
   ) {
-    return this.messageService.store(data, id);
+    const message = await this.messageService.store(data, id);
+    await pubSub.publish('messageAdded', { messageAdded: message });
+    return message;
   }
   @Mutation(() => MessageEntity)
   @UseGuards(new AuthGuard())

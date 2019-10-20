@@ -2,7 +2,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ObjectID } from 'typeorm';
 import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { Repository } from 'typeorm';
-
 import { MessageEntity } from './message.entity';
 import { UserEntity } from '../users/user.entity';
 import { ChannelEntity } from '../channels/channel.entity';

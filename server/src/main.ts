@@ -27,16 +27,16 @@ async function bootstrap() {
   app.use(helmet());
 
   app.use(helmet.noSniff());
-  app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'"],
-        imgSrc: ["'self'"],
-      },
-      disableAndroid: true,
-      setAllHeaders: true,
-    }),
-  );
+  // app.use(
+  //   helmet.contentSecurityPolicy({
+  //     directives: {
+  //       defaultSrc: ["'self'"],
+  //       imgSrc: ["'self'"],
+  //     },
+  //     disableAndroid: true,
+  //     setAllHeaders: true,
+  //   }),
+  // );
 
   app.use(helmet.ieNoOpen());
   app.enableCors();
