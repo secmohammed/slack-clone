@@ -20,7 +20,7 @@ const ormconfig = require('../ormconfig.json');
       autoSchemaFile: 'schema.gql',
       context: ({ req, connection }) => {
         if (connection) {
-          return { req: connection.context };
+          return { headers: connection.context };
         }
         return { headers: req.headers };
       },
