@@ -59,7 +59,10 @@ export class MessageService {
       { relations: ['teams', 'teams.channels'] },
     );
 
-    const channel = await this.channels.findOneOrFail({ id: channelId });
+    const channel = await this.channels.findOneOrFail(
+      { id: channelId },
+      { relations: ['team', 'team.members'] },
+    );
     if (!channel.public) {
       throw new HttpException(
         'Unauthorized Attempt, channel is not public.',
@@ -76,7 +79,8 @@ export class MessageService {
       message.user = user;
       message.channel = channel;
       message = await this.messages.save(message);
-      return user.toResponseObject();
+
+      return message;
     }
     throw new HttpException('Unauthorized Attempt', HttpStatus.UNAUTHORIZED);
   }

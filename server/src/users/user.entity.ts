@@ -62,7 +62,18 @@ export class UserEntity extends BaseEntity {
     });
   }
   toResponseObject(showToken: boolean = true) {
-    const { id, created_at, name, email, token, updated_at } = this;
+    const {
+      id,
+      created_at,
+      name,
+      email,
+      token,
+      updated_at,
+      messages,
+      channels,
+      teams,
+      notifications,
+    } = this;
     let responseObject: any = {
       id,
       name,
@@ -70,6 +81,18 @@ export class UserEntity extends BaseEntity {
       created_at,
       updated_at,
     };
+    if (notifications) {
+      responseObject.notifications = notifications;
+    }
+    if (messages) {
+      responseObject.messages = messages;
+    }
+    if (teams) {
+      responseObject.teams = teams;
+    }
+    if (channels) {
+      responseObject.channels = channels;
+    }
     if (showToken) {
       responseObject.auth_token = token;
     }
