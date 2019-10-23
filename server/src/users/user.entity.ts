@@ -16,7 +16,6 @@ import { MessageEntity as Message } from '../messages/message.entity';
 import { TeamEntity as Team } from '../teams/team.entity';
 import { config } from '../shared/config';
 import { ChannelEntity as Channel } from '../channels/channel.entity';
-import { NotificationEntity as Notification } from '../notifications/notification.entity';
 @Entity('users')
 @ObjectType()
 export class UserEntity extends BaseEntity {
@@ -41,9 +40,6 @@ export class UserEntity extends BaseEntity {
   @OneToMany(type => Message, messages => messages.user)
   @Field(() => [Message], { defaultValue: [] })
   messages: Message[];
-  @OneToMany(type => Notification, notifications => notifications.user)
-  @Field(() => [Notification], { defaultValue: [] })
-  notifications: Notification[];
 
   @CreateDateColumn()
   @Field()
@@ -72,7 +68,6 @@ export class UserEntity extends BaseEntity {
       messages,
       channels,
       teams,
-      notifications,
     } = this;
     let responseObject: any = {
       id,
@@ -81,9 +76,6 @@ export class UserEntity extends BaseEntity {
       created_at,
       updated_at,
     };
-    if (notifications) {
-      responseObject.notifications = notifications;
-    }
     if (messages) {
       responseObject.messages = messages;
     }

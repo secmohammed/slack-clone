@@ -95,6 +95,14 @@ type NotificationEntity {
   updated_at: DateTime!
 }
 
+type NotificationPayload {
+  id: ID!
+  description: String!
+  user: UserEntity!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
 type Query {
   channels: [ChannelEntity!]!
   messages: [MessageEntity!]!
@@ -111,7 +119,8 @@ input RegisterUser {
 }
 
 type Subscription {
-  messageAdded: NotificationEntity!
+  messageAdded: NotificationPayload!
+  userAddedToChannel: NotificationPayload!
 }
 
 type TeamEntity {
@@ -141,7 +150,6 @@ type UserDTO {
   teams: [TeamEntity!]
   channels: [ChannelEntity!]
   messages: [MessageEntity!]
-  notifications: [NotificationEntity!]
   created_at: DateTime!
   updated_at: DateTime!
   auth_token: String!
@@ -154,7 +162,6 @@ type UserEntity {
   teams: [TeamEntity!]
   channels: [ChannelEntity!]
   messages: [MessageEntity!]
-  notifications: [NotificationEntity!]
   created_at: DateTime!
   updated_at: DateTime!
 }

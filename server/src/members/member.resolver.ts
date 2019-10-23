@@ -7,14 +7,20 @@ import { DestroyMember } from './destroy-member.validation';
 import { IsID } from '../shared/validations/id.validation';
 import { MemberService } from './member.service';
 import { UserDTO } from '../users/user.dto';
+import { pubSub } from '../shared/utils/pubsub';
 
 @Resolver('member')
 export class MemberResolver {
   constructor(private readonly members: MemberService) {}
   @UseGuards(new AuthGuard())
   @Mutation(() => UserDTO)
-  storeMember(@Args('data') data: CreateMember, @Context('user') { id }: IsID) {
-    return this.members.store(data, id);
+  async storeMember(
+    @Args('data') data: CreateMember,
+    @Context('user') { id }: IsID,
+  ) {
+    const userAddedToChannel = await this.members.store(data, id);
+    pubSub.publish('userAddedToChannel', { userAddedToChannel });
+    return userAddedToChannel;
   }
   @UseGuards(new AuthGuard())
   @Mutation(() => UserDTO)

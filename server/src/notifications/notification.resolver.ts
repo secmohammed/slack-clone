@@ -12,11 +12,11 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../shared/middlewares/auth.guard';
 import { pubSub } from '../shared/utils/pubsub';
 import { IsID } from '../shared/validations/id.validation';
-import { NotificationEntity } from './notification.entity';
+import { NotificationPayload } from './notification.payload';
 @Resolver()
 export class NotificationResolver {
-  @Subscription(returns => NotificationEntity, {
-    filter: ({ messageAdded }, variables, context) => {
+  @Subscription(returns => NotificationPayload, {
+    filter: ({ messageAdded }, __, context) => {
       return (
         context.user.id !== messageAdded.user.id &&
         messageAdded.channel.team.members.some(
@@ -26,7 +26,18 @@ export class NotificationResolver {
     },
   })
   @UseGuards(new AuthGuard())
-  messageAdded(@Context('user') { id }: IsID, @Root() message: any) {
+  messageAdded(@Context('user') { id }: IsID) {
     return pubSub.asyncIterator('messageAdded');
+  }
+  @Subscription(returns => NotificationPayload, {
+    filter: ({ userAddedToChannel }, __, context) => {
+      return userAddedToChannel.team.members.some(
+        member => member.id === context.user.id,
+      );
+    },
+  })
+  @UseGuards(new AuthGuard())
+  userAddedToChannel(@Context('user') { id }: IsID) {
+    return pubSub.asyncIterator('userAddedToChannel');
   }
 }
