@@ -18,9 +18,9 @@ export class MemberResolver {
     @Args('data') data: CreateMember,
     @Context('user') { id }: IsID,
   ) {
-    const userAddedToChannel = await this.members.store(data, id);
-    pubSub.publish('userAddedToChannel', { userAddedToChannel });
-    return userAddedToChannel;
+    const team = await this.members.store(data, id);
+    await pubSub.publish('userAddedToChannel', { userAddedToChannel: team });
+    return team;
   }
   @UseGuards(new AuthGuard())
   @Mutation(() => UserDTO)

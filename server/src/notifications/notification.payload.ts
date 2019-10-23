@@ -5,8 +5,6 @@ import { Field, ID, ObjectType } from 'type-graphql';
 export class NotificationPayload {
   @Field(() => ID)
   id: string;
-  @Field()
-  description: string;
 
   @Field(() => User)
   user: User;

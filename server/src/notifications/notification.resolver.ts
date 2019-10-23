@@ -16,7 +16,7 @@ import { NotificationPayload } from './notification.payload';
 @Resolver()
 export class NotificationResolver {
   @Subscription(returns => NotificationPayload, {
-    filter: ({ messageAdded }, __, context) => {
+    filter: ({ messageAdded }, variables, context) => {
       return (
         context.user.id !== messageAdded.user.id &&
         messageAdded.channel.team.members.some(
@@ -30,14 +30,14 @@ export class NotificationResolver {
     return pubSub.asyncIterator('messageAdded');
   }
   @Subscription(returns => NotificationPayload, {
-    filter: ({ userAddedToChannel }, __, context) => {
-      return userAddedToChannel.team.members.some(
-        member => member.id === context.user.id,
-      );
+    filter: ({ userAddedToChannel }, variables, context) => {
+      const team = userAddedToChannel;
+      return team.members.some(member => member.id === context.user.id);
     },
   })
   @UseGuards(new AuthGuard())
   userAddedToChannel(@Context('user') { id }: IsID) {
+    console.log('here');
     return pubSub.asyncIterator('userAddedToChannel');
   }
 }

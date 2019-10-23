@@ -97,7 +97,6 @@ type NotificationEntity {
 
 type NotificationPayload {
   id: ID!
-  description: String!
   user: UserEntity!
   created_at: DateTime!
   updated_at: DateTime!
