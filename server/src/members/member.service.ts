@@ -17,7 +17,7 @@ export class MemberService {
     // check if auth user belongs to this channel | auth user is a member of the channel.
     const team = await this.teams.findOneOrFail(
       { id: teamId },
-      { relations: ['members'] },
+      { relations: ['members', 'channels', 'owner'] },
     );
     const user = await this.users.findOneOrFail({ id: userId });
     if (team.members.some(member => member.id === id)) {
@@ -33,7 +33,7 @@ export class MemberService {
   async destroy({ teamId, userId }, id) {
     let team = await this.teams.findOneOrFail(
       { id: teamId },
-      { relations: ['members'] },
+      { relations: ['members', 'channels', 'owner'] },
     );
     // if team members has the user that should leave, and the authenticated user who tries to remove this user is also a member.
     if (

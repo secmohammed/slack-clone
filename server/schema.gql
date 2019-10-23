@@ -95,13 +95,6 @@ type NotificationEntity {
   updated_at: DateTime!
 }
 
-type NotificationPayload {
-  id: ID!
-  user: UserEntity!
-  created_at: DateTime!
-  updated_at: DateTime!
-}
-
 type Query {
   channels: [ChannelEntity!]!
   messages: [MessageEntity!]!
@@ -118,8 +111,8 @@ input RegisterUser {
 }
 
 type Subscription {
-  messageAdded: NotificationPayload!
-  userAddedToChannel: NotificationPayload!
+  messageAdded: MessageEntity!
+  userMentionedAtTeam: TeamEntity!
 }
 
 type TeamEntity {

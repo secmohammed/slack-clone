@@ -19,7 +19,9 @@ export class MemberResolver {
     @Context('user') { id }: IsID,
   ) {
     const team = await this.members.store(data, id);
-    await pubSub.publish('userAddedToChannel', { userAddedToChannel: team });
+    await pubSub.publish('userMentionedAtTeam', {
+      userMentionedAtTeam: team,
+    });
     return team;
   }
   @UseGuards(new AuthGuard())
