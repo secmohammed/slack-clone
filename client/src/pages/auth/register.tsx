@@ -7,9 +7,9 @@ import {
     Message,
     Form
 } from "semantic-ui-react";
-import { useInput } from "../components/partials/hooks/useInput";
+import { useInput } from "../../components/partials/hooks/useInput";
 import { useMutation } from "@apollo/react-hooks";
-import REGISTER_USER_MUTATION from "../graphql/users/mutations/REGISTER_USER";
+import REGISTER_USER_MUTATION from "../../graphql/users/mutations/REGISTER_USER";
 
 const Register = (props: any) => {
     const { value: name, bind: bindName, reset: resetName } = useInput("");

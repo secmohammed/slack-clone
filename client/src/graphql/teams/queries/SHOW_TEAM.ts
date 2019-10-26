@@ -1,11 +1,22 @@
 import { gql } from "apollo-boost";
 export default gql`
     query showTeam($id: String!) {
-        showTeam(id: $id) {
+        showTeam(data: { id: $id }) {
             id
             name
-            channels
-            owner
+            channels {
+                id
+                name
+            }
+            members {
+                id
+                email
+                name
+            }
+            owner {
+                id
+                email
+            }
         }
     }
 `;

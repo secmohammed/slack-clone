@@ -99,6 +99,7 @@ type Query {
   channels: [ChannelEntity!]!
   messages: [MessageEntity!]!
   teams: [TeamEntity!]!
+  showTeam(data: IsID!): TeamEntity!
   users: [UserEntity!]!
   me: UserDTO!
 }

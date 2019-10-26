@@ -9,8 +9,8 @@ import React, { Component } from "react";
 import CreateTeam from "../pages/teams/create";
 import ShowTeam from "../pages/teams/show";
 import Home from "../pages/home";
-import Login from "../pages/login";
-import Register from "../pages/register";
+import Login from "../pages/auth/login";
+import Register from "../pages/auth/register";
 
 //@ts-ignore
 const PrivateRoute = ({ component, ...rest }) => (
@@ -34,10 +34,10 @@ const Routes = () => (
     <Router>
         <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/register" exact component={Register} />
-            <Route path="/login" exact component={Login} />
+            <Route path="/auth/register" exact component={Register} />
+            <Route path="/auth/login" exact component={Login} />
             <PrivateRoute path="/teams/create" exact component={CreateTeam} />
-            <Route path="/teams/:id" exact component={ShowTeam} />
+            <Route path="/teams/:id/:channelId?" exact component={ShowTeam} />
         </Switch>
     </Router>
 );

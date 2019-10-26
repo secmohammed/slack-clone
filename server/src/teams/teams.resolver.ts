@@ -16,6 +16,10 @@ export class TeamResolver {
   teams() {
     return this.teamService.get();
   }
+  @Query(() => TeamEntity)
+  showTeam(@Args('data') { id }: IsID) {
+    return this.teamService.show(id);
+  }
   @Mutation(() => TeamEntity)
   @UseGuards(new AuthGuard())
   createTeam(

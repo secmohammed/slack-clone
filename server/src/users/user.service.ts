@@ -62,7 +62,9 @@ export class UserService {
   }
 
   async me({ id }: any): Promise<UserDTO> {
-    const user = await this.users.findOneOrFail(id);
+    const user = await this.users.findOneOrFail(id, {
+      relations: ['teams'],
+    });
     return user.toResponseObject(false);
   }
 }

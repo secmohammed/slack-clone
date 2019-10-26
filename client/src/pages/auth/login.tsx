@@ -7,9 +7,9 @@ import {
     Form,
     Input
 } from "semantic-ui-react";
-import { useInput } from "../components/partials/hooks/useInput";
+import { useInput } from "../../components/partials/hooks/useInput";
 import { useMutation } from "@apollo/react-hooks";
-import LOGIN_USER_MUTATION from "../graphql/users/mutations/LOGIN_USER";
+import LOGIN_USER_MUTATION from "../../graphql/users/mutations/LOGIN_USER";
 const Login = (props: any) => {
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput("");
     const {
