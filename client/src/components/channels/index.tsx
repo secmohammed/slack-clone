@@ -19,13 +19,15 @@ interface ChannelProps {
     users: UserInterface[];
     username: string;
     onAddChannelClick: any;
+    onAddMemberClick: any;
 }
 export default ({
     teamName,
     channels,
     users,
     username,
-    onAddChannelClick
+    onAddChannelClick,
+    onAddMemberClick
 }: ChannelProps) => (
     <ChannelWrapper>
         <PushLeft>
@@ -45,6 +47,10 @@ export default ({
             {users.map(user => (
                 <User key={`user-${user.id}`} user={user} />
             ))}
+            <ChannelSidebarListHeader>
+                Add new Member
+                <Icon onClick={onAddMemberClick} name="add circle" />
+            </ChannelSidebarListHeader>
         </ChannelSidebar>
     </ChannelWrapper>
 );

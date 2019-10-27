@@ -22,8 +22,11 @@ const ShowTeam = () => {
         ssr: true
     });
     useEffect(() => {
-        if (error || userQuery.error) {
-            history.push("/");
+        if (!localStorage.getItem("token") || userQuery.error) {
+            history.push("/auth/login");
+        }
+        if (error) {
+            history.push("/teams/create");
         }
     }, [error, history, userQuery]);
     if (!loading && !userQuery.loading) {

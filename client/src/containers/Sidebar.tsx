@@ -3,10 +3,20 @@ import Channels from "../components/channels";
 import { Team, User } from "../components/partials/interfaces";
 import Teams from "../components/teams";
 import AddChannelModal from "../components/channels/addChannelModal";
+import InvitePeopleModal from "../components/channels/invitePeopleModal";
 export default ({ me, team }: { me: User; team: Team }) => {
-    const [openAddChannelModal, setOpenAddChannelModal] = useState(false);
-    const toggleAddChannelModal = () =>
-        setOpenAddChannelModal(!openAddChannelModal);
+    const [
+        openAddChannelModalStatus,
+        setOpenedAddChannelModalStatus
+    ] = useState(false);
+    const [
+        openInvitationModalStatus,
+        setOpenedInvitationModalStatus
+    ] = useState(false);
+    const togglePeopleInvitationModal = () =>
+        setOpenedInvitationModalStatus(!openInvitationModalStatus);
+    const toggleAddchannelModalStatus = () =>
+        setOpenedAddChannelModalStatus(!openAddChannelModalStatus);
     return (
         <>
             <Teams
@@ -20,12 +30,19 @@ export default ({ me, team }: { me: User; team: Team }) => {
                 username={me.name}
                 channels={team.channels!}
                 users={team.members!}
-                onAddChannelClick={toggleAddChannelModal}
+                onAddChannelClick={toggleAddchannelModalStatus}
+                onAddMemberClick={togglePeopleInvitationModal}
             />
             <AddChannelModal
-                open={openAddChannelModal}
-                onClose={toggleAddChannelModal}
+                open={openAddChannelModalStatus}
+                onClose={toggleAddchannelModalStatus}
                 teamId={team.id}
+            />
+            <InvitePeopleModal
+                teamId={team.id}
+                onClose={togglePeopleInvitationModal}
+                open={openInvitationModalStatus}
+                key="invite-people-modal"
             />
         </>
     );

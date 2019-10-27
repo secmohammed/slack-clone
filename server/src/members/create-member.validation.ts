@@ -6,8 +6,7 @@ export class CreateMember {
   @Field()
   @IsNotEmpty()
   @IsString()
-  @IsUUID()
-  userId: string;
+  email: string;
   @Field()
   @IsNotEmpty()
   @IsString()

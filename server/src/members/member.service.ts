@@ -13,17 +13,17 @@ export class MemberService {
     @InjectRepository(UserEntity)
     private readonly users: Repository<UserEntity>,
   ) {}
-  async store({ teamId, userId }, id) {
+  async store({ teamId, email }, id) {
     // check if auth user belongs to this channel | auth user is a member of the channel.
     const team = await this.teams.findOneOrFail(
       { id: teamId },
       { relations: ['members', 'channels', 'owner'] },
     );
-    const user = await this.users.findOneOrFail({ id: userId });
+    const user = await this.users.findOneOrFail({ email });
     if (team.members.some(member => member.id === id)) {
       team.members.push(user);
       this.teams.save(team);
-      return team;
+      return user;
     }
     throw new HttpException(
       'You are not a member of this channel to add others',

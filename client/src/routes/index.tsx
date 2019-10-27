@@ -22,7 +22,7 @@ const PrivateRoute = ({ component, ...rest }) => (
             ) : (
                 <Redirect
                     to={{
-                        pathname: "/login",
+                        pathname: "/auth/login",
                         state: { from: props.location }
                     }}
                 />
@@ -36,8 +36,8 @@ const Routes = () => (
             <Route path="/" exact component={Home} />
             <Route path="/auth/register" exact component={Register} />
             <Route path="/auth/login" exact component={Login} />
-            <PrivateRoute path="/teams/create" exact component={CreateTeam} />
             <Route path="/teams/:id/:channelId?" exact component={ShowTeam} />
+            <PrivateRoute path="/teams/create" exact component={CreateTeam} />
         </Switch>
     </Router>
 );

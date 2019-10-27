@@ -25,9 +25,9 @@ const CreateTeam = () => {
             }
         });
 
-        if (data && data.login) {
+        if (data && data.createTeam) {
             resetName();
-            history.push("/");
+            history.push(`/teams/${data.createTeam.id}`);
         }
     };
     return (

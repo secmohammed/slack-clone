@@ -21,7 +21,7 @@ input CreateChannel {
 }
 
 input CreateMember {
-  userId: String!
+  email: String!
   teamId: String!
 }
 
