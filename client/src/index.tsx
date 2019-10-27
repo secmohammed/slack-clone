@@ -2,23 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import * as serviceWorker from "./serviceWorker";
 import Routes from "./routes";
-import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { InMemoryCache } from "apollo-cache-inmemory";
 import "semantic-ui-css/semantic.min.css";
-
-const client = new ApolloClient({
-    uri: "http://localhost:3000/graphql",
-    cache: new InMemoryCache(),
-    request: operation => {
-        const token = localStorage.getItem("token");
-        operation.setContext({
-            headers: {
-                authorization: token ? `Bearer ${token}` : ""
-            }
-        });
-    }
-});
+import { client } from "./utils/graphql/client";
 
 const App = () => (
     <ApolloProvider client={client}>

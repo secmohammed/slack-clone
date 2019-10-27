@@ -7,6 +7,16 @@ export default gql`
             channels {
                 id
                 name
+                messages {
+                    id
+                    text
+                    created_at
+                    updated_at
+                    user {
+                        id
+                        name
+                    }
+                }
             }
             members {
                 id

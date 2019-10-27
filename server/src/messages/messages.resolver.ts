@@ -6,6 +6,7 @@ import { AuthGuard } from '../shared/middlewares/auth.guard';
 import { CreateMessage } from './create-message.validation';
 import { DestroyMessage } from './destroy-message.validation';
 import { IsID } from '../shared/validations/id.validation';
+import { IndexChannelMessages } from './index-channel-messages.validation';
 import { MessageEntity } from './message.entity';
 import { MessageService } from './message.service';
 import { UpdateMessage } from './update-message.validation';
@@ -16,8 +17,8 @@ export class MessageResolver {
 
   @Query(() => [MessageEntity])
   @UseGuards(new AuthGuard())
-  messages(@Context('user') { id }: IsID) {
-    return this.messageService.get();
+  messages(@Args('data') { id }: IsID) {
+    return this.messageService.get(id);
   }
   @Mutation(() => MessageEntity)
   @UseGuards(new AuthGuard())
@@ -26,7 +27,9 @@ export class MessageResolver {
     @Context('user') { id }: IsID,
   ) {
     const message = await this.messageService.store(data, id);
-    await pubSub.publish('messageAdded', { messageAdded: message });
+    await pubSub.publish('messageAddedToChannel', {
+      messageAddedToChannel: message,
+    });
     return message;
   }
   @Mutation(() => MessageEntity)

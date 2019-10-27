@@ -84,8 +84,9 @@ export class MessageService {
     }
     throw new HttpException('Unauthorized Attempt', HttpStatus.UNAUTHORIZED);
   }
-  async get() {
+  async get(id) {
     return this.messages.find({
+      where: { channelId: id },
       relations: [
         'user',
         'channel',

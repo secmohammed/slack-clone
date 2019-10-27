@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router";
 import { useQuery } from "@apollo/react-hooks";
 import SHOW_TEAM_QUERY from "../../graphql/teams/queries/SHOW_TEAM";
 import ME_QUERY from "../../graphql/users/queries/ME";
-import Messages from "../../components/partials/styles/messages";
+import Messages from "../../components/messages";
 import SendMessage from "../../components/messages/messageInput";
 import ChannelHeader from "../../components/headers/ChannelHeader";
 import Sidebar from "../../containers/Sidebar";
@@ -35,18 +35,11 @@ const ShowTeam = () => {
                   (channel: Channel) => channelId === channel.id
               )
             : data.showTeam.channels[0];
-
         return (
             <Layout>
                 <Sidebar me={userQuery.data.me} team={data.showTeam} />
-
                 <ChannelHeader channelName={currentChannel.name} />
-                <Messages>
-                    <ul className="message-list">
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </Messages>
+                <Messages messages={currentChannel.messages} />
                 <SendMessage channelName={currentChannel.name} />
             </Layout>
         );

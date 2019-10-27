@@ -28,4 +28,10 @@ export class MessageEntity extends BaseEntity {
   @ManyToOne(() => Channel, channel => channel.messages)
   @Field(() => Channel)
   channel: Channel;
+  @CreateDateColumn()
+  @Field()
+  created_at: Date;
+  @UpdateDateColumn()
+  @Field()
+  updated_at: Date;
 }
