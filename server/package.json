@@ -27,7 +27,7 @@
     "@nestjs/typeorm": "^6.2.0",
     "@types/jsonwebtoken": "^8.3.4",
     "apollo-server-express": "^2.9.5",
-    "apollo-server-fastify": "^2.9.5",
+    "apollo-server-fastify": "^2.14.2",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.10.1",
