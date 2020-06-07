@@ -871,7 +871,7 @@ abstract-logging@^1.0.0:
   resolved "https://registry.yarnpkg.com/abstract-logging/-/abstract-logging-1.0.0.tgz#8b7deafd310559bc28f77724dd1bb30177278c1b"
   integrity sha1-i33q/TEFWbwo93ck3RuzAXcnjBs=
 
-accepts@^1.3.3, accepts@^1.3.5, accepts@~1.3.7:
+accepts@^1.3.5, accepts@~1.3.7:
   version "1.3.7"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.7.tgz#531bc726517a3b2b41f850021c6cc15eaab507cd"
   integrity sha512-Il80Qs2WjYlJIBNzNkK6KYqlVMTbZLXgHx2oT0pU/fjRHyEp+PEfEPY0R3WCwAGVOtauxh1hOxNgIf5bv7dQpA==
@@ -1126,15 +1126,15 @@ apollo-server-express@^2.14.2:
     subscriptions-transport-ws "^0.9.16"
     type-is "^1.6.16"
 
-apollo-server-fastify@^2.9.5:
-  version "2.9.5"
-  resolved "https://registry.yarnpkg.com/apollo-server-fastify/-/apollo-server-fastify-2.9.5.tgz#1e9d1039e2dbac2464029da42838cb8a0e3e434c"
-  integrity sha512-rY/3CjeJwHMBpzEIwrVy2wOgNto/gMHAVuh6ymyfyUQgWZHIPNmXzplMjPGpPL7TeMMpPCthM7p5r1hnDrnEqQ==
+apollo-server-fastify@^2.14.2:
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-fastify/-/apollo-server-fastify-2.14.2.tgz#5ba2571666736b5eed95df20041a0cfcd46bfa2f"
+  integrity sha512-r1pqrLz5UGJExUCTy5qH2io4JGnebCUR3J7g0qPWUIaOZvkzku1RZTuxTWupQeBUj8qm1A3gK2Pd8s15/BYWMQ==
   dependencies:
     "@apollographql/graphql-playground-html" "1.6.24"
-    apollo-server-core "^2.9.5"
-    apollo-server-types "^0.2.4"
-    fastify-accepts "^0.5.0"
+    apollo-server-core "^2.14.2"
+    apollo-server-types "^0.5.0"
+    fastify-accepts "^1.0.0"
     fastify-cors "^0.2.0"
     graphql-subscriptions "^1.0.0"
     graphql-tools "^4.0.0"
@@ -2573,13 +2573,13 @@ fast-safe-stringify@2.0.7, fast-safe-stringify@^2.0.7:
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.7.tgz#124aa885899261f68aedb42a7c080de9da608743"
   integrity sha512-Utm6CdzT+6xsDk2m8S6uL8VHxNwI6Jub+e9NYTcAms28T84pTa25GJQV9j0CY0N1rM8hK4x6grpF2BQf+2qwVA==
 
-fastify-accepts@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/fastify-accepts/-/fastify-accepts-0.5.0.tgz#c17c201278f2bfc51bfb93ffe48efc4fc40fd363"
-  integrity sha1-wXwgEnjyv8Ub+5P/5I78T8QP02M=
+fastify-accepts@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fastify-accepts/-/fastify-accepts-1.0.0.tgz#8475d1e4c4eaf777eb916144ddc904f92d3c726a"
+  integrity sha512-JVI/zKXjVfwIAdXDZvNKM7CCEWkbTFSZQUEQxrH4KBprbopGxq3R4RSIsVxqhdkVanm90yyVcPtgEa2MnDwPyg==
   dependencies:
-    accepts "^1.3.3"
-    fastify-plugin "^0.2.1"
+    accepts "^1.3.5"
+    fastify-plugin "^1.2.0"
 
 fastify-compress@^0.11.0:
   version "0.11.0"
@@ -2624,13 +2624,6 @@ fastify-formbody@3.1.0:
   dependencies:
     fastify-plugin "^1.0.0"
     qs "^6.5.1"
-
-fastify-plugin@^0.2.1:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-0.2.2.tgz#e01b67685fd02e87edc98670ce2acfe251a2c715"
-  integrity sha512-oRJdjdudgCkQQUARNeh2rkbxFAmj2OhCJSVBNBLUbhS0orF+IMQ4u/bc661N1jh/wDI2J+YKmXmmHSVFQI4e7A==
-  dependencies:
-    semver "^5.4.1"
 
 fastify-plugin@^1.0.0, fastify-plugin@^1.2.0, fastify-plugin@^1.3.0, fastify-plugin@^1.5.0:
   version "1.6.0"
