@@ -30,7 +30,7 @@
     "apollo-server-fastify": "^2.14.2",
 
     "bcryptjs": "^2.4.3",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.10.1",
     "dotenv": "^8.1.0",
     "express-rate-limit": "^5.0.0",
